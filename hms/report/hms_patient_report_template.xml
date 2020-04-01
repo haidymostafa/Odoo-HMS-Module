@@ -1,0 +1,59 @@
+<odoo>
+    <template id="hms_patient_report_template">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="patient">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h1 style="color:red">Patient Status Report</h1>
+                    <div class="page">
+                        <img t-attf-src="data:image/jpg;base64,{{patient.Image}}" style="align:right; width:200px;height:150px;"/>
+                    </div>
+                    <h3 style="color:black">
+                            First Name: <span t-field="patient.fname"/>
+                    </h3>
+                    <h3 style="color:black">
+                            Last Name: <span t-field="patient.lname"/>
+                    </h3>
+                    <h3 style="color:black">
+                            Age: <span t-field="patient.age"/>
+                    </h3>
+                    <h3 style="color:black">
+                            Department: <span t-field="patient.dept_id"/>
+                    </h3>
+                    <h3 style="color:black">
+                            Email: <span t-field="patient.email"/>
+                    </h3>
+                    <h3 style="color:black">
+                            PCR: <span t-field="patient.pcr"/>
+                    </h3>
+                    <h3 style="color:black">
+                            Birth Date: <span t-field="patient.birth_date"/>
+                    </h3>
+                    <h3 style="color:black">
+                            Blood Type: <span t-field="patient.blood_type"/>
+                    </h3>
+
+                    <h3 style="color:red">
+                            Log History
+                    </h3>
+                    <table class="table">
+                        <tr>
+                            <th>User</th>
+                            <th>Date</th>
+                            <th>Info</th>
+                        </tr>
+                        <t t-foreach="patient.logs_id" t-as="patient">
+                            <tr>
+                                <td><span t-field="patient.created_by"/></td>
+                                <td><span t-field="patient.date"/></td>
+                                <td><span t-field="patient.description"/></td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+
+            </t>
+        </t>
+    </t>
+</template>
+</odoo>

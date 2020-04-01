@@ -1,0 +1,77 @@
+<odoo>
+    <data>
+        <record id="action_patients" model="ir.actions.act_window">
+            <field name="name">Patients</field>
+            <field name="res_model">hms.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="fname" />
+                    <field name="lname" />
+                    <field name="age" />
+                </tree>
+            </field>
+        </record>
+        <menuitem id="hms_root_menu" name="HMS" />
+        <menuitem id="hms_data_menu" name="Data" parent="hms_root_menu" />
+        <menuitem id="hms_patients_menu" name="Patients" parent="hms_data_menu" action="action_patients" />
+        <!-- Tree View -->
+        <record id="patient_tree" model="ir.ui.view">
+            <field name="name">HMS Patient</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <tree string="Patients">
+                    <field name="fname" />
+                    <field name="lname"/>
+                    <field name="patient_email"/>
+                    <field name="age" />
+                    <field name="blood_type" />
+                </tree>
+            </field>
+        </record>
+        <!-- Form View -->
+        <record id="hms_patient_form_view" model="ir.ui.view">
+            <field name="name"> Patient Form View </field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <form editable="top">
+                    <sheet>
+                        <header>
+                            <button string="Change Status" type="object" name="change_status" />
+                            <field name="state" widget="statusbar" />
+                        </header>
+                        <group>
+                            <group string="Patient Basic Info">
+                                <field name="fname" required="1" />
+                                <field name="lname" required="1" />
+                                <field name="patient_email" required="1"/>
+                                <field name="address"/>
+                                <field name="age" />
+                                <field name="birth_date" />
+                                <!-- <field name="state" /> -->
+                            </group>
+                            <group string="More Info">
+                                <field name="prc" />
+                                <field name="cr_ratio" attrs="{'required' : [('prc', '=', True)]}"/>
+                                <field name="history" attrs="{'invisible' : [('age', '>=', 50)]}" />
+                                <field name="blood_type" />
+                                <field name="image" widget="image" width="100px" height="100px"/>
+                                <field name="is_dept_selected"  invisible="1"  />
+                                <field name="myflag"  invisible="1"  />
+                                <!--  -->
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Department Field">
+                                <field name="dept_id" domain="[('is_opened', '=', 'True')]" />
+                            </page>
+                            <page string="Doctor Field">
+
+                                <field name="doctors_id" widget="many2many_tags" attrs="{'readonly' : [('is_dept_selected', '=', False)]}" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

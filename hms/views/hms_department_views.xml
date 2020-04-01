@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+        <record id="action_departments" model="ir.actions.act_window">
+            <field name="name">Departments</field>
+            <field name="res_model">hms.department</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="capacity" />
+                    <field name="is_opened" />
+                </tree>
+            </field>
+        </record>
+        <menuitem id="hms_root_menu" name="HMS" />
+        <menuitem id="hms_data_menu" name="Data" parent="hms_root_menu" />
+        <menuitem id="hms_departments_menu" name="departments" parent="hms_data_menu" action="action_departments" />
+        <!-- Tree View -->
+        <record id="hms_department_tree_view" model="ir.ui.view">
+            <field name="name">HMS Department</field>
+            <field name="model">hms.department</field>
+            <field name="arch" type="xml">
+                <tree string="Departments" >
+                    <field name="name" />
+                    <field name="Capacity" />
+                    <field name="is_opened" />
+                </tree>
+            </field>
+        </record>
+        <!-- Form View -->
+        <record id="hms_department_form_view" model="ir.ui.view">
+            <field name="name"> Hospital Form View </field>
+            <field name="model">hms.department</field>
+            <field name="arch" type="xml">
+                <form editable="top">
+                    <sheet>
+                        <group string="Department Data">
+                            <field name="name" />
+                            <field name="Capacity"/>
+                            <field name="is_opened"/>
+                        </group>
+                        <notebook>
+                            <page string="Patient Field">
+                                <field name="patient_id" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record id="action_logs" model="ir.actions.act_window">
+            <field name="name">Logs</field>
+            <field name="res_model">hms.logs</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="created_by" />
+                    <field name="date" />
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+        <menuitem id="hms_root_menu" name="HMS" />
+        <menuitem id="hms_data_menu" name="Data" parent="hms_root_menu" />
+        <menuitem id="hms_logs_menu" name="logs" parent="hms_data_menu" action="action_logs" />
+        <!-- Tree View -->
+        <record id="logs_tree" model="ir.ui.view">
+            <field name="name">HMS Logs</field>
+            <field name="model">hms.logs</field>
+            <field name="arch" type="xml">
+                <tree string="logs">
+                    <field name="created_by" />
+                    <field name="date" />
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
